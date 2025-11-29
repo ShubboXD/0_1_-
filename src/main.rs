@@ -5,33 +5,37 @@ use rand::Rng;
 
 fn main () {
     // max values
-    let mut maxl = String::new();
-    let mut maxt = String::new();
+    let mut max_lives = String::new();
+    let mut max_tries = String::new();
         // taking input for max values
         println!();
         println!("Lives mean the amount of times you can retry after a failed equation, while tries is the same but for a single equation,");
         print!("How many lives do you prefer to play with?: ");
         io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut maxl).expect("Failed to read line");
+        io::stdin().read_line(&mut max_lives)
+        .expect("Failed to read line");
         print!("How many tries per eq do you prefer to play with?: ");
         io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut maxt).expect("Failed to read line");
+        io::stdin().read_line(&mut max_tries)
+        .expect("Failed to read line");
     // conversion for max values
-    let maxl: u32 = maxl.trim().parse().expect("Need a +ve number input");
-    let maxt: u32 = maxt.trim().parse().expect("Need a +ve number input");
+    let max_lives: u32 = max_lives.trim().parse()
+    .expect("Need a +ve number input");
+    let max_tries: u32 = max_tries.trim().parse()
+    .expect("Need a +ve number input");
         // somethingss
-        let mut ca = 0;
+        let mut correct_anss = 0;
         let mut plays = 0;
         println!();
-        println!("You have {maxl} Lives overall + {maxt} tries per eq in this game.");
+        println!("You have {max_lives} Lives overall + {max_tries} tries per eq in this game.");
     // while-for loop logic
-    let mut lives = maxl;
+    let mut lives = max_lives;
     while lives != 0 { 
-    for tries in 1..=maxt {
+    for tries in 1..=max_tries {
         // display lives
-        if plays != 0 && tries != maxt {
+        if plays != 0 && tries != max_tries {
         println!("You have {lives} life/lives remaining!");
-        println!("You have answered {ca}/{plays} questions correctly till now on {maxl} lives and {maxt} tries settings!\n");
+        println!("You have answered {correct_anss}/{plays} questions correctly till now on {max_lives} lives and {max_tries} tries settings!\n");
     }
     // variables to be used
     let mut rng = rand::thread_rng();
@@ -43,7 +47,7 @@ fn main () {
         // displaying question
         println!("x - y = {} and y + {z} = {}",x - y, y + z);
     // getting input
-    print!("What is the value of x + y ({} tries left): ", (maxt +1) - tries);
+    print!("What is the value of x + y ({} tries left): ", (max_tries +1) - tries);
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut guess)
     .expect("Failed to read line");
@@ -53,9 +57,9 @@ fn main () {
     // if-else based on the answer
     if guess == ans {
         println!("You win!");
-        ca += 1;
+        correct_anss += 1;
         plays += 1;
-    } else if tries == maxt {
+    } else if tries == max_tries {
         println!("You lost!, the answer is {x}(x) + {y}(y) = {}", ans);
         lives -= 1;
         plays += 1;
