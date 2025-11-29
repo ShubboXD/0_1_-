@@ -1,7 +1,6 @@
 #![allow(unused)]
 use std::io::{self, Write};
 use std::cmp::Ordering;
-use std::os::linux::fs::MetadataExt;
 use rand::Rng;
 
 fn main () {
