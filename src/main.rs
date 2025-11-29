@@ -12,8 +12,7 @@ fn main () {
         println!("Lives mean the amount of times you can retry after a failed equation, while tries is the same but for a single equation,");
         print!("How many lives do you prefer to play with?: ");
         io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut max_lives)
-        .expect("Failed to read line");
+        io::stdin().read_line(&mut max_lives) .expect("Failed to read line");
         print!("How many tries per eq do you prefer to play with?: ");
         io::stdout().flush().unwrap();
         io::stdin().read_line(&mut max_tries)
@@ -27,26 +26,28 @@ fn main () {
         let mut correct_anss = 0;
         let mut plays = 0;
         println!();
-        println!("You have {max_lives} Lives overall + {max_tries} tries per eq in this game.");
-    // while-for loop logic
+        println!("You have {max_lives} Lives overall + {max_tries} tries per eq in this game.\n");
     let mut lives = max_lives;
+    // while loop
     while lives != 0 { 
-    for tries in 1..=max_tries {
-        // display lives
-        if plays != 0 && tries != max_tries {
-        println!("You have {lives} life/lives remaining!");
-        println!("You have answered {correct_anss}/{plays} questions correctly till now on {max_lives} lives and {max_tries} tries settings!\n");
-    }
     // variables to be used
     let mut rng = rand::thread_rng();
     let x = rng.gen_range(0..101);
     let y = rng.gen_range(0..101);
     let z = rng.gen_range(0..101);
-    let ans = x + y;
-    let mut guess = String::new();
+         // display lives
+        if plays != 0 {
+            println!();
+        println!("You have {lives} life/lives remaining!");
+        println!("You have answered {correct_anss}/{plays} questions correctly till now on {max_lives} lives and {max_tries} tries settings!\n");
+    }
         // displaying question
         println!("x - y = {} and y + {z} = {}",x - y, y + z);
-    // getting input
+    let ans = x + y;
+    // for loop
+    for tries in 1..=max_tries {
+   // getting input
+    let mut guess = String::new();
     print!("What is the value of x + y ({} tries left): ", (max_tries +1) - tries);
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut guess)
@@ -59,6 +60,8 @@ fn main () {
         println!("You win!");
         correct_anss += 1;
         plays += 1;
+        let tries = max_tries;
+        break;
     } else if tries == max_tries {
         println!("You lost!, the answer is {x}(x) + {y}(y) = {}", ans);
         lives -= 1;
