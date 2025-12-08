@@ -2,6 +2,7 @@
 use std::io::{self, Write};
 use std::cmp::Ordering;
 use rand::Rng;
+use equation_max::remaining;
 
 fn main () {
     // max values
@@ -12,7 +13,8 @@ fn main () {
         println!("Lives mean the amount of times you can retry after a failed equation, while tries is the same but for a single equation,");
         print!("How many lives do you prefer to play with?: ");
         io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut max_lives) .expect("Failed to read line");
+        io::stdin().read_line(&mut max_lives) 
+        .expect("Failed to read line");
         print!("How many tries per eq do you prefer to play with?: ");
         io::stdout().flush().unwrap();
         io::stdin().read_line(&mut max_tries)
@@ -48,7 +50,7 @@ fn main () {
     for tries in 1..=max_tries {
    // getting input
     let mut guess = String::new();
-    print!("What is the value of x + y ({} tries left): ", (max_tries +1) - tries);
+    print!("What is the value of x + y ({} tries left): ", remaining(max_tries, tries));
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut guess)
     .expect("Failed to read line");
