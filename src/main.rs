@@ -1,4 +1,3 @@
-#![allow(unused)]
 use std::io::{self, Write};
 use std::cmp::Ordering;
 use rand::Rng;
@@ -34,9 +33,8 @@ fn main () {
     while lives != 0 { 
     // variables to be used
     let mut rng = rand::thread_rng();
-    let x = rng.gen_range(0..101);
-    let y = rng.gen_range(0..101);
-    let z = rng.gen_range(0..101);
+    let tup = (rng.gen_range(0..101), rng.gen_range(0..101), rng.gen_range(0..101));
+    let (x, y, z) = tup;
          // display lives
         if plays != 0 {
             println!();
